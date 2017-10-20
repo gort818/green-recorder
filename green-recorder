@@ -37,7 +37,11 @@ else:
   config.add_section('Options')
   config.set('Options', 'frames', '30')
   config.set('Options', 'delay', '0')
-  config.set('Options', 'folder', "file://" + GLib.get_user_special_dir(GLib.USER_DIRECTORY_VIDEOS))
+  config.set('Options', 'folder',"file://" + os.path.expanduser('~')) # set default folder to home
+  try:
+      config.set('Options', 'folder', "file://" + GLib.get_user_special_dir(GLib.USER_DIRECTORY_VIDEOS))#set default folder to video if exits
+  except TypeError:
+      print("No video directory found, using home directory instead")
   config.set('Options', 'command', '')
   config.set('Options', 'filename', '')
   config.set('Options', 'videocheck', 'True')
